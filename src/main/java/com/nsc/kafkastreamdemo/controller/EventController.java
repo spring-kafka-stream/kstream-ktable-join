@@ -1,26 +1,27 @@
 package com.nsc.kafkastreamdemo.controller;
 
+import com.nsc.kafkastreamdemo.model.Config;
 import com.nsc.kafkastreamdemo.sender.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/event")
+@RequestMapping
 public class EventController {
 
     @Autowired
     private MessageSender messageSender;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public void send(@RequestParam(value = "value") Integer value) {
-        messageSender.send(value);
+    @RequestMapping(value = "/event", method = RequestMethod.GET)
+    public void sendEvent() {
+        messageSender.send();
     }
 
-    @RequestMapping(value = "/send", method = RequestMethod.GET)
-    public void send() {
-        messageSender.send();
+    @RequestMapping(value = "/config", method = RequestMethod.POST)
+    public Config sendConfig(@RequestBody Config config) {
+        return messageSender.sendConfig(config);
     }
 }

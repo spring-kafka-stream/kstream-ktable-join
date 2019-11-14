@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor // needed for kafka stream, otherwise deserialize from Object value (no delegate- or property-based Creator
+@NoArgsConstructor
 @AllArgsConstructor
-public class Event {
-    private String tenantId;
+public class Config {
     private String location;
+    private int value;
 }

@@ -18,16 +18,21 @@ spring:
                 json:
                   value:
                     default:
-                      type: com.nsc.kafkastreamdemo.model.Event
+                      type: com.nsc.kafkastreamdemo.model.Config
           bindings:
-            inputTable:
+            configIn:
               consumer:
                 materializedAs: all-songs
         binder:
           brokers: localhost:9092
       bindings:
-        inputTable:
+        eventIn:
           destination: nscevent
           group: nsceventGroup
+        configIn:
+          destination: nscconfig
+          group: nscconfigGroup
         eventOut:
           destination: nscevent
+        configOut:
+          destination: nscconfig
